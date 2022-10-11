@@ -6,11 +6,11 @@ Feature: users
         | Kent          | kent@epassiona.com  | Diplom#2022       | user  |
         Given Ole is administrator
         And Ole is logged in
-        And Ole is in the 'Users' page
+        And Ole should see the 'Users' page
 
     Scenario: Create user
         When Ole click on 'Create new'
-        Then Ole should see the Create page
+        Then Ole should see the 'Create' page
         When Ole fill in the field 'name' value 'Tom'
         And Ole fill in the field 'email' value 'tom@epassions.com'
         And Ole fill in the field 'password' value 'Diplom#2022'
@@ -19,7 +19,7 @@ Feature: users
 
     Scenario: Create user that allready exist
         When Ole click on 'Create new'
-        Then Ole should see the Create page
+        Then Ole should see the 'Create' page
         When Ole fill in the field 'name' value 'Kent'
         And Ole fill in the field 'email' value 'Kent@epassions.com'
         And Ole fill in the field 'password' value 'Diplom#2022'

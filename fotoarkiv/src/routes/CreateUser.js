@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { getCurrentUser, loginWithJWT } from '../services/loginService';
+import { getCurrentUser } from '../services/loginService';
 import { saveUser } from '../services/userService';
 import { Form, Button, Dropdown, DropdownButton} from 'react-bootstrap';
 import { toast } from 'react-toastify';
@@ -34,9 +34,9 @@ const CreateUser = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await saveUser(User);
+            await saveUser(User);
             toast(`Bruger ${User.name} er oprettet`);
-            // Todo : send retur til liste/oversigt
+            // TODO: send retur til liste/oversigt
         } catch(ex) {
             setErrors(ex.response.data);
         }

@@ -1,39 +1,32 @@
 const {Given, When, Then, Before} = require('@cucumber/cucumber'); 
 const {assertThat, is} = require('hamjest');
+const {saveUser} = require('../../src/services/userService');
+const {getCurrentUser} = require('../../src/services/loginService');
 
-Given('users exist:', function (dataTable) {
-    // dataTable.hashes().map((user) => {
-    //   this.users[user.name] = new User({
-    //     name : user.name, 
-    //     email : user.email, 
-    //     password : user.password, 
-    //     isAdmin : user.isAdmin});
-    // });
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+Given('users exist:', function async (dataTable) {
+    dataTable.hashes().map(async (user) => {
+      this.users[user.name] = await saveUser({
+        name : user.name, 
+        email : user.email, 
+        password : user.password, 
+        isAdmin : user.isAdmin});
+    });
   });
 
   Given('{user} is administrator', function (user) {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    return user.isAdmin;
   });
 
-  Given('{user} is logged in', function (user) {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+  Given('{user} is logged in', function (user) {    
+    return getCurrentUser().email === user.email;
   });
 
-  Given('{user} is in the {string} dashboard', function (user, string) {
+  Given('{user} should see the {string} page', function (user, string) {
     // Write code here that turns the phrase above into concrete actions
     return 'pending';
   });
 
   When('{user} click on {string}', function (user, string) {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
-  });
-
-  Then('{user} should see the Create page', function (user) {
     // Write code here that turns the phrase above into concrete actions
     return 'pending';
   });
