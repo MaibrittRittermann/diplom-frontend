@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Container, Navbar, Nav } from "react-bootstrap";
 import {LinkContainer} from 'react-router-bootstrap';
 
 const Menu = ({user}) => {
@@ -16,21 +16,27 @@ const Menu = ({user}) => {
               <LinkContainer to="/">                
                 <Nav.Link>Forsiden</Nav.Link>
               </LinkContainer>
-              {user && <LinkContainer to="/search">
-                  <Nav.Link>Søg fotos</Nav.Link>
-                </LinkContainer>
-              }
+              
               {user && <LinkContainer to="/upload">
                   <Nav.Link>Upload</Nav.Link>
                 </LinkContainer>
               }
-              <NavDropdown title="Konto" id="basic-nav-dropdown">
-                {!user && <NavDropdown.Item href="/login">Login</NavDropdown.Item>}
-                {user && <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>}
-                {user && user.isAdmin && <NavDropdown.Item href="/users">Brugere</NavDropdown.Item>}
-                
-                
-              </NavDropdown>
+
+              {!user && <LinkContainer to="/login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+              }
+
+              {user && <LinkContainer to="/logout">
+                  <Nav.Link>Logout</Nav.Link>
+                </LinkContainer>
+              }
+
+              {user && user.isAdmin && <LinkContainer to="/users">
+                  <Nav.Link>Brugere</Nav.Link>
+                </LinkContainer>
+              }
+              
             </Nav>
           </Navbar.Collapse>
         </Container>

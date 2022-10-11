@@ -5,7 +5,8 @@ import { saveUser } from '../services/userService';
 import { Form, Button, Dropdown, DropdownButton} from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-const CreateUser = () => {
+const CreateUser = props => {
+    
 
     const [User, setUser] = useState({
         name: '',
@@ -36,7 +37,9 @@ const CreateUser = () => {
         try {
             await saveUser(User);
             toast(`Bruger ${User.name} er oprettet`);
-            // TODO: send retur til liste/oversigt
+
+            // TODO : FIX THIS
+            props.history.push('/users');
         } catch(ex) {
             setErrors(ex.response.data);
         }
@@ -48,11 +51,11 @@ const CreateUser = () => {
             <div className='d-flex justify-content-center align-items-center'>
                 <Form className="rounded p-4" onSubmit={handleSubmit}>
                     <Form.Group className='mb-3' controlId='formBasicName'>
-                        <Form.Label>Navn: </Form.Label>
+                        <Form.Label>Fulde navn: </Form.Label>
                         <Form.Control type="name" name='name' value={User.name} placeholder='Indtast navn' onChange={handleChange}/>
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='formBasicEmail'>
-                        <Form.Label>Email: </Form.Label>
+                        <Form.Label>E-mail adresse: </Form.Label>
                         <Form.Control type="email" name='email' value={User.email} placeholder='Indtast Emailadresse' onChange={handleChange}/>
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='formBasicPassword'>
@@ -64,7 +67,7 @@ const CreateUser = () => {
                         <Form.Group className='mb-3' controlId='formUserAccess'>
                             {/* TODO: opdater select i forhold til state */}
                             <Form.Label>Brugeradgang: </Form.Label>
-                            <DropdownButton name="isAdmin" title="Vælg brugeradgang" onSelect={handleSelect}>
+                            <DropdownButton name="isAdmin" title="Vælg brugeradgang" variant="outline-dark" onSelect={handleSelect}>
                                 <Dropdown.Item eventKey={false}>Bruger</Dropdown.Item>
                                 <Dropdown.Item eventKey={true}>Admin</Dropdown.Item>
                             </DropdownButton>

@@ -1,6 +1,3 @@
-.App {
-  text-align: center;
-}
 
 .App-logo {
   height: 40vmin;
@@ -14,14 +11,21 @@
 }
 
 .App-header {
-  background-image: linear-gradient(white, #eee, #282c34, #282c34, #eee, white);
-  min-height: 10vh;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(67, 56, 112, 0.53)), url('../public/banner.jpg');
+  background-size: cover;
+  min-height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+ 
+  color: rgb(40, 30, 75);
+  /* -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(60, 59, 75); */
+}
+.App-header h1 {
+  font-size: 3.5rem !important;
+  letter-spacing: 10px;
 }
 
 .App-link {

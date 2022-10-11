@@ -1,6 +1,6 @@
 import {getUsers} from '../services/userService';
 import React, { useState, useEffect } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Container, Button, Table } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import {Link} from 'react-router-dom';
 
@@ -20,7 +20,7 @@ const Users = () => {
     },[]);
         
     return (
-        <div>
+        <Container>
             <h1>Brugere</h1>
             <LinkContainer to="/createuser">
                 <Button type="primary" >Opret ny bruger</Button>
@@ -44,7 +44,7 @@ const Users = () => {
                 )}
                 </tbody>
             </Table>
-        </div>
+        </Container>
         );
 }
  

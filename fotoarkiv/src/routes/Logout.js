@@ -5,7 +5,8 @@ const Logout = () => {
 
     useEffect(()=> {
         logout();
-    })
+        window.location = "/";
+    });
 
     return ( null );
 }
