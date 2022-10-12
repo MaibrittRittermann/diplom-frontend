@@ -8,9 +8,10 @@ import Home from "./routes/Home";
 import LoginForm from "./routes/LoginForm";
 import Logout from "./routes/Logout";
 import Users from "./routes/Users";
-import CreateUser from "./routes/CreateUser";
+import UserPage from "./routes/User";
 import Result from "./routes/Result";
 import Upload from "./routes/Upload";
+import DeleteUser from "./routes/UserDelete";
 
 function App() {
 
@@ -18,7 +19,6 @@ function App() {
 
   useEffect (() => {
     setUser(getCurrentUser());
-    console.log(User.name);
   }, []);
 
   return (
@@ -28,7 +28,9 @@ function App() {
         <ToastContainer />
         <Routes>
           <Route path="/users" element={<Users/>}/>
-          <Route path="/createuser" element={<CreateUser/>}/>
+          <Route path="/user/:id" element={<UserPage/>}/>
+          <Route path="/user" element={<UserPage/>}/>
+          <Route path="/deleteuser/:id/:name" element={<DeleteUser/>}/>
           <Route path="/result" element={<Result/>}/>
           <Route path="/upload" element={<Upload/>}/>
           <Route path="/login" element={<LoginForm/>}/>

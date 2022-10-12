@@ -2,14 +2,14 @@ import React from "react";
 
 const Result = () => {
 
-    const handleChange = e => {
-        console.log(e);
-    }
+    // const handleChange = e => {
+    //     console.log(e);
+    // }
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log(e);
-    }
+    // const handleSubmit = e => {
+    //     e.preventDefault();
+    //     console.log(e);
+    // }
 
 
     return ( <React.Fragment>

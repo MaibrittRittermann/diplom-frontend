@@ -7,7 +7,7 @@ const Menu = ({user}) => {
     return (
       <Navbar expand="lg" bg="white" variant="light">
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/">
             <img src="logo.png" id="logo" alt="Logo" height="60px" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
