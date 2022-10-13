@@ -10,6 +10,13 @@
   }
 }
 
+.navbar .nav-link {
+  letter-spacing: 4px;
+  /* font-variant: small-caps;   */
+  font-size: 1.4rem;
+  margin-left: 10px;
+}
+
 .App-header {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(67, 56, 112, 0.53)), url('../public/banner.jpg');
   background-size: cover;
@@ -17,19 +24,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
- 
-  color: rgb(40, 30, 75);
-  /* -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: rgb(60, 59, 75); */
+  justify-content: center; 
+  color: black;
 }
 .App-header h1 {
   font-size: 3.5rem !important;
   letter-spacing: 10px;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -40,3 +40,4 @@
     transform: rotate(360deg);
   }
 }
+
