@@ -3,9 +3,9 @@ import { getCurrentUser } from '../services/loginService';
 import { getUser, saveUser } from '../services/userService';
 import { toast } from 'react-toastify';
 import { Form, Button, Dropdown, DropdownButton} from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const User = props => {
+const User = () => {
 
     const [User, setUser] = useState({
         _id: useParams().id,
@@ -16,6 +16,7 @@ const User = props => {
     });
 
     const [errors, setErrors] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         editUser();
@@ -52,7 +53,7 @@ const User = props => {
             toast(`Bruger ${User.name} er oprettet`);
 
             // TODO : FIX THIS
-            props.history.push('/users');
+            navigate('/users');
         } catch(ex) {
             setErrors(ex.response.data);
         }

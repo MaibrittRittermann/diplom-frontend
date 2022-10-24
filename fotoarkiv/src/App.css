@@ -28,8 +28,8 @@
   letter-spacing: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-link {
+  font-size: 1.25rem;
 }
 
 @keyframes App-logo-spin {
