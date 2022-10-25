@@ -1,3 +1,10 @@
+:root {
+  --bs-link-color: rgb(91, 96, 154);
+}
+.btn-primary {
+  --bs-btn-bg: rgb(91, 96, 154);
+  --bs-btn-border-color: rgb(91, 96, 154);
+}
 
 .App-logo {
   height: 40vmin;
@@ -18,10 +25,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
- 
   color: rgb(40, 30, 75);
-  /* -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: rgb(60, 59, 75); */
 }
 .App-header h1 {
   font-size: 3.5rem !important;
@@ -40,3 +44,5 @@
     transform: rotate(360deg);
   }
 }
+
+
