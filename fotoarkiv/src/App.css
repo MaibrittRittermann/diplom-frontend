@@ -1,3 +1,16 @@
+:root {
+  --bs-link-color: rgb(91, 96, 154);
+}
+.btn {
+  --bs-btn-border-radius: 18px;
+  --bs-btn-padding-x: 2rem;
+}
+.btn-primary {
+  --bs-btn-bg: rgb(91, 96, 154);
+  --bs-btn-border-color: rgb(91, 96, 154);
+  --bs-btn-hover-bg: rgb(65, 69, 114);
+  --bs-btn-hover-border-color: rgb(65, 69, 114);
+}
 
 .App-logo {
   height: 40vmin;
@@ -30,6 +43,10 @@
 .App-header h1 {
   font-size: 3.5rem !important;
   letter-spacing: 10px;
+}
+
+.nav-link {
+  font-size: 1.25rem;
 }
 
 @keyframes App-logo-spin {

@@ -8,17 +8,22 @@ const Menu = ({user}) => {
       <Navbar expand="lg" bg="white" variant="light">
         <Container>
           <Navbar.Brand href="/">
-            <img src="logo.png" id="logo" alt="Logo" height="60px" />
+            <img src="logo.png" id="logo" alt="Logo" height="80px" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <LinkContainer to="/">                
-                <Nav.Link>Forsiden</Nav.Link>
+                <Nav.Link>Søg fotos</Nav.Link>
               </LinkContainer>
               
               {user && <LinkContainer to="/upload">
-                  <Nav.Link>Upload</Nav.Link>
+                  <Nav.Link>Upload fotos</Nav.Link>
+                </LinkContainer>
+              }
+
+              {user && user.isAdmin && <LinkContainer to="/users">
+                  <Nav.Link>Brugere</Nav.Link>
                 </LinkContainer>
               }
 
@@ -29,11 +34,6 @@ const Menu = ({user}) => {
 
               {user && <LinkContainer to="/logout">
                   <Nav.Link>Logout</Nav.Link>
-                </LinkContainer>
-              }
-
-              {user && user.isAdmin && <LinkContainer to="/users">
-                  <Nav.Link>Brugere</Nav.Link>
                 </LinkContainer>
               }
               

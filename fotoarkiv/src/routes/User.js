@@ -3,9 +3,9 @@ import { getCurrentUser } from '../services/loginService';
 import { getUser, saveUser } from '../services/userService';
 import { toast } from 'react-toastify';
 import { Form, Button, Dropdown, DropdownButton} from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const User = props => {
+const User = () => {
 
     const [User, setUser] = useState({
         _id: useParams().id,
@@ -16,29 +16,25 @@ const User = props => {
     });
 
     const [errors, setErrors] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         editUser();
     }, []);
 
     async function editUser() {
-        if(User._id) getUser(User._id).then(res => 
-        {
-            const eUser = { _id: res.data._id, name: res.data.name, email: res.data.email, isAdmin: res.data.isAdmin};
-            setUser({...eUser});
-        });
+        if(User._id) getUser(User._id)
+            .then(res => {
+                const eUser = { _id: res.data._id, name: res.data.name, email: res.data.email, isAdmin: res.data.isAdmin};
+                setUser({...eUser});
+            })
+            .catch(err => { console.log(err)}); // TODO: Log errors and make nice error message
     }
 
     const handleChange = e => {
         let value = e.target.value;
         let name = e.target.name;
-
-        setUser((prevalue)=> {
-            return{
-                ...prevalue,
-                [name]: value
-            }
-        });
+        setUser((prevalue)=> { return { ...prevalue, [name]: value }});
     }
 
     const handleSelect = e => {
@@ -49,10 +45,8 @@ const User = props => {
         e.preventDefault();
         try {
             await saveUser(User);
-            toast(`Bruger ${User.name} er oprettet`);
-
-            // TODO : FIX THIS
-            props.history.push('/users');
+            toast(`Bruger ${User.name} er gemt`);
+            navigate('/users');
         } catch(ex) {
             setErrors(ex.response.data);
         }
@@ -78,16 +72,16 @@ const User = props => {
                     </Form.Group>
                     {getCurrentUser().isAdmin &&(
                         <Form.Group className='mb-3' controlId='formUserAccess'>
-                            {/* TODO: opdater select i forhold til state */}
                             <Form.Label>Brugeradgang: </Form.Label>
-                            <DropdownButton name="isAdmin" title="Vælg brugeradgang" variant="outline-dark" onSelect={handleSelect}>
+                            <DropdownButton name="isAdmin" title={User.isAdmin?"Admin":"Bruger"} variant="outline-dark" onSelect={handleSelect}>
                                 <Dropdown.Item eventKey={false} active={ User.isAdmin === false ? true:false } >Bruger</Dropdown.Item>
                                 <Dropdown.Item eventKey={true} active={ User.isAdmin }>Admin</Dropdown.Item>
                             </DropdownButton>
                         </Form.Group>
-                    )}
-                    
-                    <Button variant='primary' type="submit" >Gem Bruger</Button>
+                    )} 
+                    <div className='text-center'>                   
+                        <Button variant='primary' type="submit" >Gem Bruger</Button>
+                    </div>
                 </Form>
             </div>
         </div>
