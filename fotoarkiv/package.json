@@ -30,7 +30,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "config": "node scripts/generateWebConfig.js",
+    "build": "npm run config && react-scripts build",
     "bdd": "cucumber-js -f @cucumber/pretty-formatter",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
