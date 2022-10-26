@@ -14,11 +14,16 @@ const Menu = ({user}) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <LinkContainer to="/">                
-                <Nav.Link>Forsiden</Nav.Link>
+                <Nav.Link>Søg fotos</Nav.Link>
               </LinkContainer>
               
               {user && <LinkContainer to="/upload">
-                  <Nav.Link>Upload</Nav.Link>
+                  <Nav.Link>Upload fotos</Nav.Link>
+                </LinkContainer>
+              }
+
+              {user && user.isAdmin && <LinkContainer to="/users">
+                  <Nav.Link>Brugere</Nav.Link>
                 </LinkContainer>
               }
 
@@ -29,11 +34,6 @@ const Menu = ({user}) => {
 
               {user && <LinkContainer to="/logout">
                   <Nav.Link>Logout</Nav.Link>
-                </LinkContainer>
-              }
-
-              {user && user.isAdmin && <LinkContainer to="/users">
-                  <Nav.Link>Brugere</Nav.Link>
                 </LinkContainer>
               }
               

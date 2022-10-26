@@ -1,38 +1,42 @@
 import {getUsers} from '../services/userService';
 import React, { useState, useEffect } from 'react';
 import { Container, Button, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 const Users = () => {
     
     let [Users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async () => {
-            await getUsers()
-                .then((res) => {
-                    setUsers(res.data);
-                }).catch((e)=>console.log(e));
-        }
-
         fetchData();
     },[]);
+
+    const fetchData = async () => {
+        await getUsers()
+            .then((res) => { setUsers(res.data); })
+            .catch((err)=>console.log(err));  // TODO: Log errors and make nice error message
+    }
         
+    const handleCreate = () => {
+        navigate("/user");
+    }
+
     return (
         <Container className='mt-5'>
             <h1>Brugere</h1>
-            <LinkContainer to="/user">
-                <Button variant="primary" >Opret ny bruger</Button>
-            </LinkContainer>
+            <div className='text-center'>
+                <Button variant="primary" onClick={handleCreate}>Opret ny bruger</Button>
+            </div>
             <Table>
                 <thead>
                     <tr>
-                        <th>Navn</th>
-                        <th>E-mail</th>
-                        <th>Rettigheder</th>
-                        <th>Rediger</th>
-                        <th>Slet</th>
+                        <th className='text-start'>Navn</th>
+                        <th className='text-start'>E-mail</th>
+                        <th className='text-start'>Rettigheder</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,8 +46,8 @@ const Users = () => {
                         <td><Link to={`/user/${User._id}` }>{User.name}</Link></td>
                         <td><Link to={`/user/${User._id}` }>{User.email}</Link></td>
                         <td><Link to={`/user/${User._id}` }>{User.isAdmin?'Admin':'Bruger'}</Link></td>  
-                        <td><Link to={`/user/${User._id}` }><Button variant="primary">Rediger</Button></Link></td>
-                        <td><Link to={`/deleteuser/${User._id}/${User.name}` }><Button variant="danger">Slet Bruger</Button></Link></td>                      
+                        <td className='text-end'><Link to={`/user/${User._id}` }><Button variant="primary">Rediger</Button></Link></td>
+                        <td className='text-end'><Link to={`/deleteuser/${User._id}/${User.name}` }><Button variant="danger">Slet</Button></Link></td>                      
                     </tr> 
                 )}
                 </tbody>
