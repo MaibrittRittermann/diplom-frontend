@@ -2,7 +2,7 @@ import React , { useState, useEffect } from 'react';
 import { getCurrentUser } from '../services/loginService';
 import { getUser, saveUser } from '../services/userService';
 import { toast } from 'react-toastify';
-import { Form, Button, Dropdown, DropdownButton} from 'react-bootstrap';
+import { Form, Button} from 'react-bootstrap';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const User = () => {
@@ -38,7 +38,7 @@ const User = () => {
     }
 
     const handleSelect = e => {
-        setUser({...User, isAdmin: e});
+        setUser({...User, isAdmin: e.target.value});
     }
 
     const handleSubmit = async (e) => {
@@ -73,10 +73,10 @@ const User = () => {
                     {getCurrentUser().isAdmin &&(
                         <Form.Group className='mb-3' controlId='formUserAccess'>
                             <Form.Label>Brugeradgang: </Form.Label>
-                            <DropdownButton name="isAdmin" title={User.isAdmin?"Admin":"Bruger"} variant="outline-dark" onSelect={handleSelect}>
-                                <Dropdown.Item eventKey={false} active={ User.isAdmin === false ? true:false } >Bruger</Dropdown.Item>
-                                <Dropdown.Item eventKey={true} active={ User.isAdmin }>Admin</Dropdown.Item>
-                            </DropdownButton>
+                            <select name="isAdmin" onChange={handleSelect}>
+                                <option value={false}>Bruger</option>
+                                <option value={true}>Admin</option>
+                            </select>
                         </Form.Group>
                     )} 
                     <div className='text-center'>                   

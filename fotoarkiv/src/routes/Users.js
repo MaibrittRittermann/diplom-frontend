@@ -27,7 +27,7 @@ const Users = () => {
         <Container className='mt-5'>
             <h1>Brugere</h1>
             <div className='text-center'>
-                <Button variant="primary" onClick={handleCreate}>Opret ny bruger</Button>
+                <Button variant="primary" name="new" onClick={handleCreate}>Opret ny bruger</Button>
             </div>
             <Table>
                 <thead>

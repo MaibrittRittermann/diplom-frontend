@@ -27,7 +27,7 @@ const DeleteUser = () => {
 
     return ( <Form className="rounded p-4 text-center" onSubmit={handleSubmit} >
         <h1 className="mt-5">Ønsker du virkelig at slette {name}</h1>
-        <Button variant="primary" onClick={handleReturn} >Fortryd</Button>
+        <Button variant="primary" name="return" onClick={handleReturn} >Fortryd</Button>
         <Button variant="danger" type="submit" >Slet {name}</Button>
     </Form> );
 }

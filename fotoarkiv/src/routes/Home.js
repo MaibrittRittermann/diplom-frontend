@@ -18,7 +18,7 @@ const Home = ({user}) => {
                         <h1>Find fotos i fotoarkivet:</h1>
                         <Form.Group className='mb-3' controlId='formBasicName'>
                             <Form.Control type="search" name='search' placeholder='Indtast søgeord'/>
-                            <Button variant='primary' type="submit" >Søg</Button>
+                            <Button variant='primary' type="submit" name="seek">Søg</Button>
                         </Form.Group>
                     </Form>
                 }
