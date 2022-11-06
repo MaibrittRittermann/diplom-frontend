@@ -11,7 +11,7 @@ export function getUser(id) {
 }
 
 export function getUserByEmail(email) {
-    return http.get(`${apiEndpoint}/email/` + email);
+    return http.get(`${apiEndpoint}email/${email}`);
 }
 
 export function saveUser(user) {
