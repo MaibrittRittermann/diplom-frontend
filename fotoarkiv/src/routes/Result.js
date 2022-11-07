@@ -22,18 +22,18 @@ const Result = () => {
 
     return ( 
     <Container className='mt-5'>
-        <h1>Fundne Fotos:</h1>
+        <h1>Fundne Fotos omkring {label}:</h1>
+        <div className="row">
 
-        { Photos.map((photo, key) => {
-            <div className='card' key={key}>
-                <img src={photo} alt={label}/>
-                <p>{photo}</p>
-                {console.log("test " + key)}
+
+
+        { Photos.map((photo, key) => 
+            <div className='col-12 col-md-6 col-xl-3 m-1' key={key}>
+                <img className="img-fluid" src={photo} alt={label}/>
             </div> 
-
-           
-        })}
+        )}
         
+        </div>
     </Container> );
 }
  
