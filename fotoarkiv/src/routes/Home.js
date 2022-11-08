@@ -12,7 +12,6 @@ const Home = ({user}) => {
         let name = e.target.name;
         setSearch((prevalue)=> { return { ...prevalue, [name
         ]: value }});
-        console.log("change : " + Search.search);
     }
 
     const handleSubmit = (e) => {

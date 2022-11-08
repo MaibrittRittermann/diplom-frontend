@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container, Card, Button } from 'react-bootstrap';
 import {getPhotoByLabel} from "../services/photoService";
 
 const Result = () => {
@@ -28,9 +28,21 @@ const Result = () => {
 
 
         { Photos.map((photo, key) => 
-            <div className='col-12 col-md-6 col-xl-3 m-1' key={key}>
-                <img className="img-fluid" src={photo} alt={label}/>
-            </div> 
+
+            <Card style={{ width: '18rem' }} key={key}>
+            <Card.Img className="mt-2" src={photo.url} alt={label}/>
+            <Card.Body>
+            {/* <Card.Title></Card.Title> */}
+            <hr/>
+            <Card.Text>
+                Fotograf : {photo.photographer}
+            </Card.Text>
+            <Button variant="primary">Hent foto</Button>
+            </Card.Body>
+            </Card>
+            // <div className='col-12 col-md-6 col-xl-3 m-1' key={key}>
+            //     <img className="img-fluid" src={photo} alt={label}/>
+            // </div> 
         )}
         
         </div>
