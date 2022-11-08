@@ -25,14 +25,11 @@ const Result = () => {
         <h1>Fundne Fotos omkring {label}:</h1>
         <div className="row">
 
-
-
         { Photos.map((photo, key) => 
 
             <Card style={{ width: '18rem' }} key={key}>
             <Card.Img className="mt-2" src={photo.url} alt={label}/>
             <Card.Body>
-            {/* <Card.Title></Card.Title> */}
             <hr/>
             <Card.Text>
                 Fotograf : {photo.photographer}
@@ -40,9 +37,6 @@ const Result = () => {
             <Button variant="primary">Hent foto</Button>
             </Card.Body>
             </Card>
-            // <div className='col-12 col-md-6 col-xl-3 m-1' key={key}>
-            //     <img className="img-fluid" src={photo} alt={label}/>
-            // </div> 
         )}
         
         </div>
