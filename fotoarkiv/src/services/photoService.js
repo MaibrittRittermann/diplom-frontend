@@ -14,14 +14,9 @@ export function getPhotoByLabel(label) {
     return http.get(`${apiEndpoint}label/${label}`);
 }
 
-// export function savePhoto(photo) {
-//     if(photo._id) {
-//         const body = { ...photo };
-//         delete body._id;
-//         return http.put(apiEndpoint + photo._id, body);
-//     }
-//     return http.post(apiEndpoint, photo);
-// }
+export function savePhotos(photos) {
+    return http.post(apiEndpoint, photos);
+}
 
 // export function deletePhoto(id) {
 //     return http.delete(apiEndpoint + id);

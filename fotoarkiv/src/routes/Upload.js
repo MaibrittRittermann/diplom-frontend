@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
-import { useParams } from "react-router-dom";
+import { savePhotos } from "../services/photoService";
 
 const Upload = (props) => {
 
-    const params = useParams();
+    const [Photos, setPhotos] = useState({
+        files: [],
+        photographerId: props.user.photographerId,
+        photographer: props.user.name
+    });
+
+    const handleChange = e => {
+        let value = Array.prototype.slice.call(e.target.files);
+        let name = e.target.name;
+        setPhotos((prevalue)=> { return { ...prevalue, [name]: value }});
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    console.log(props.user.photographerId);
-        
+        await savePhotos(Photos);
     }
 
     return ( <React.Fragment>
@@ -17,9 +26,7 @@ const Upload = (props) => {
             <Form className="container text-center" onSubmit={handleSubmit}>
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Vælg billeder til upload:</Form.Label>
-                    <Form.Control type="file" multiple accept="image/png, image/jpeg" />.
-                    <Form.Control type="hidden" name="photographerName" value={props.user.name}/>
-                    <Form.Control type="hidden" name="photographerId" value={props.user.photographerId}/>
+                    <Form.Control type="file" name="files" multiple accept="image/png, image/jpeg" onChange={handleChange} />.
                     <Button variant='primary' type="submit" >Upload billeder</Button>
                 </Form.Group>   
             </Form>
