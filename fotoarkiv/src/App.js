@@ -32,7 +32,7 @@ function App() {
           <Route path="/user" element={<UserPage/>}/>
           <Route path="/deleteuser/:id/:name" element={<DeleteUser/>}/>
           <Route path="/result/:search" element={<Result/>}/>
-          <Route path="/upload" element={<Upload/>}/>
+          <Route path="/upload" element={<Upload user={User} />}/>
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/" element={<Home user={User} />}/>

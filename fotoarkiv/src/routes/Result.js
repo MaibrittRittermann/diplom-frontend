@@ -23,11 +23,11 @@ const Result = () => {
     return ( 
     <Container className='mt-5'>
         <h1>Fundne Fotos omkring {label}:</h1>
-        <div className="row">
+        <div className="row justify-content-around">
 
         { Photos.map((photo, key) => 
 
-            <Card style={{ width: '18rem' }} key={key}>
+            <Card className="m-1" style={{ width: '18rem' }} key={key}>
             <Card.Img className="mt-2" src={photo.url} alt={label}/>
             <Card.Body>
             <hr/>
