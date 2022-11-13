@@ -15,8 +15,7 @@ export function getPhotoByLabel(label) {
 }
 
 export function savePhotos(data) {
-    console.log(data);
-    return http.post(apiEndpoint, {data});
+    return http.post(apiEndpoint, data);
 }
 
 // export function deletePhoto(id) {
