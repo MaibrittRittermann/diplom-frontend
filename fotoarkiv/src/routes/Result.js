@@ -22,7 +22,7 @@ const Result = () => {
 
     return ( 
     <Container className='mt-5'>
-        <h1>Fundne Fotos omkring {label}:</h1>
+        <h1>Fundne Fotos af {label}:</h1>
         <div className="row justify-content-around">
 
         { Photos.map((photo, key) => 
@@ -32,7 +32,11 @@ const Result = () => {
             <Card.Body>
             <hr/>
             <Card.Text>
-                Fotograf : {photo.photographer}
+                Dato: {new Date(photo.date).toLocaleDateString('da-DK')} <br/>
+                <span className="small">Fotograf : {photo.photographer} </span><br/>
+                {photo.labels.map((l, i) =>
+                    <span className="small" key={i}>#{l} </span>      
+                )}
             </Card.Text>
             <Button variant="primary">Hent foto</Button>
             </Card.Body>

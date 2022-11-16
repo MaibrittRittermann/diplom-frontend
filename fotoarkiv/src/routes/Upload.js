@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { savePhotos } from "../services/photoService";
+import { useNavigate } from "react-router-dom";
 
 const Upload = (props) => {
 
     const [Photos, setPhotos] = useState(null);
+    const navigate = useNavigate();
 
 
     const handleChange = e => {
@@ -26,7 +28,9 @@ const Upload = (props) => {
         formData.append('photographerId', props.user.photographerId);
         formData.append('photographer', props.user.name);
 
-        await savePhotos(formData);
+        savePhotos(formData).then((res) => {
+            navigate('/train', {state: {predictions: res.data}});
+        });
     }
 
     return (

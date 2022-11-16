@@ -11,6 +11,7 @@ import Users from "./routes/Users";
 import UserPage from "./routes/User";
 import Result from "./routes/Result";
 import Upload from "./routes/Upload";
+import Train from "./routes/Train";
 import DeleteUser from "./routes/UserDelete";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/deleteuser/:id/:name" element={<DeleteUser/>}/>
           <Route path="/result/:search" element={<Result/>}/>
           <Route path="/upload" element={<Upload user={User} />}/>
+          <Route path="/train" element={<Train user={User} />}/>
           <Route path="/login" element={<LoginForm/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/" element={<Home user={User} />}/>

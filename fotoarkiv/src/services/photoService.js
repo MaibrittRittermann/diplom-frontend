@@ -1,6 +1,6 @@
 import http from './httpService';
 
-const apiEndpoint = "photos/";
+const apiEndpoint = 'photos/';
 
 export function getPhotos() {
     return http.get(apiEndpoint);
@@ -18,6 +18,6 @@ export function savePhotos(data) {
     return http.post(apiEndpoint, data);
 }
 
-// export function deletePhoto(id) {
-//     return http.delete(apiEndpoint + id);
-// }
+export function trainModel(data) {
+    return http.post(`${apiEndpoint}train/`, data);
+}
