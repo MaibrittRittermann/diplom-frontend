@@ -12,6 +12,8 @@ const User = () => {
         name: '',
         email: '',
         password: '',
+        confirmPassword: '',
+        photographerId: '',
         isAdmin: false
     });
 
@@ -37,8 +39,12 @@ const User = () => {
         setUser((prevalue)=> { return { ...prevalue, [name]: value }});
     }
 
-    const handleSelect = e => {
-        setUser({...User, isAdmin: e.target.value});
+    const validateInput = e => {
+        const {name, value} = e.target;
+        if (!value)
+            setErrors(`Indtast værdi i ${name}`);
+        else if(name === 'confirmPassword' && User.password !== value)
+            setErrors(`Adgangskoder matcher ikke`);
     }
 
     const handleSubmit = async (e) => {
@@ -59,7 +65,7 @@ const User = () => {
                 <Form className="rounded p-4" onSubmit={handleSubmit}>
                     <Form.Group className='mb-3' controlId='formBasicName'>
                         <Form.Label>Fulde navn: </Form.Label>
-                        <Form.Control type="name" name='name' value={User.name} placeholder='Indtast navn' onChange={handleChange}/>
+                        <Form.Control type="text" name='name' value={User.name} placeholder='Indtast navn' onChange={handleChange}/>
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='formBasicEmail'>
                         <Form.Label>E-mail adresse: </Form.Label>
@@ -68,12 +74,20 @@ const User = () => {
                     <Form.Group className='mb-3' controlId='formBasicPassword'>
                         <Form.Label>{User._id && 'Ny '} Adgangskode: </Form.Label>
                         <Form.Control type="password" name="password" value={User.password} placeholder='Indtast Adgangskode'  onChange={handleChange}/>
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='formSecPassword'>
+                        <Form.Label>{User._id && 'Ny '} Gentag kode: </Form.Label>
+                        <Form.Control type="password" name="confirmPassword" value={User.confirmPassword} placeholder='Indtast Adgangskode igen'  onChange={handleChange} onBlur={validateInput}/>
                         {errors && <div className='alert alert-danger'>{errors}</div>}
+                    </Form.Group>
+                    <Form.Group className='mb-3' controlId='formUserId'>
+                        <Form.Label>{User._id && 'Ny '} Bruger Id: </Form.Label>
+                        <Form.Control type="number" name="photographerId" value={User.photographerId} placeholder='Bruger ID'  onChange={handleChange}/>
                     </Form.Group>
                     {getCurrentUser().isAdmin &&(
                         <Form.Group className='mb-3' controlId='formUserAccess'>
                             <Form.Label>Brugeradgang: </Form.Label>
-                            <select name="isAdmin" onChange={handleSelect}>
+                            <select name="isAdmin" onChange={handleChange}>
                                 <option value={false}>Bruger</option>
                                 <option value={true}>Admin</option>
                             </select>

@@ -21,3 +21,7 @@ export function savePhotos(data) {
 export function trainModel(data) {
     return http.post(`${apiEndpoint}train/`, data);
 }
+
+export function downloadPhoto(data) {
+    return http.post(`${apiEndpoint}download/`, data);
+}

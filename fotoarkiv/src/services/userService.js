@@ -15,12 +15,15 @@ export function getUserByEmail(email) {
 }
 
 export function saveUser(user) {
+    
+    const body = { ...user };
+    delete body.confirmPassword;
+
     if(user._id) {
-        const body = { ...user };
-        delete body._id;
+        delete body._id;        
         return http.put(apiEndpoint + user._id, body);
     }
-    return http.post(apiEndpoint, user);
+    return http.post(apiEndpoint, body);
 }
 
 export function deleteUser(id) {

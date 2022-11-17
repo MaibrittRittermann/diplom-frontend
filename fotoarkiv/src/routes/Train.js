@@ -29,8 +29,8 @@ const Train = (props) => {
 
         {predictions.unPredicted&&<h1 className='text-center'>Billeder der mangler søgeord:</h1>}
         {predictions.unPredicted.map((p, key) => 
-            <Form onSubmit={handleSubmit}>
-                <Card className="m-1 flex-row" key={key}>
+            <Form onSubmit={handleSubmit} key={key}>
+                <Card className="m-1 flex-row">
                     <Card.Img className="mt-2" style={{ width: '18rem' }} src={p.url} alt={p.name}/>
                     <Card.Body style={{textAlign:'left !important'}}>
 
