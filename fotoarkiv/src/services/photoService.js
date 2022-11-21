@@ -1,9 +1,8 @@
 import http from './httpService';
-
 const apiEndpoint = 'photos/';
 
-export function getPhotos() {
-    return http.get(apiEndpoint);
+export function getPhoto(photo) {
+    return http.get(apiEndpoint + photo, { responseType: 'blob' });
 }
 
 export function getPhotoByName(id) {
@@ -19,9 +18,9 @@ export function savePhotos(data) {
 }
 
 export function trainModel(data) {
-    return http.post(`${apiEndpoint}train/`, data);
+    return http.post(`train/`, data);
 }
 
 export function downloadPhoto(data) {
-    return http.post(`${apiEndpoint}download/`, data);
+    return http.post(`${apiEndpoint}download/`, data,{ responseType: 'blob' });
 }

@@ -1,13 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Form, Card, Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { trainModel } from '../services/photoService';
+import { getPhoto } from "../services/photoService";
+import { toast } from 'react-toastify';
 
 const Train = (props) => {
 
     const location = useLocation();
-    const predictions = location.state.predictions;
-    
+    let predictions = location.state.predictions;
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await Promise.all(predictions.predicted.map(async(p, i) => {
+                let photo = await getPhoto(p.name);
+                let url = URL.createObjectURL(photo.data);
+                predictions.predicted[i].urlLocal = url;
+            }));
+            await Promise.all(predictions.unPredicted.map(async(p, i) => {
+                let photo = await getPhoto(p.name);
+                let url = URL.createObjectURL(photo.data);
+                predictions.unPredicted[i].urlLocal = url;
+            }));
+        }
+        fetchData();
+    },[]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -20,18 +38,21 @@ const Train = (props) => {
         formData.append('photographerId', props.user.photographerId);
         formData.append('photographer', props.user.name);
 
-        await trainModel(formData);
+        const trained = await trainModel(formData);
 
-        // TODO: announce update
+        if (trained.labeled === true)
+            toast.message(`${e.target.photo.value} er gemt med søgeord ${labels}`);
     }
 
     return ( <div className="container" onSubmit={handleSubmit}>
 
-        {predictions.unPredicted&&<h1 className='text-center'>Billeder der mangler søgeord:</h1>}
+        {(predictions.unPredicted.length>0)&&<h1 className='text-center'>Billeder der mangler søgeord:</h1>}
         {predictions.unPredicted.map((p, key) => 
             <Form onSubmit={handleSubmit} key={key}>
-                <Card className="m-1 flex-row">
-                    <Card.Img className="mt-2" style={{ width: '18rem' }} src={p.url} alt={p.name}/>
+                <Card className="m-1 flex-row p-2">
+                    <Card.Header>
+                        <Card.Img style={{ width: '18rem' }} src={p.urlLocal} alt={p.name}/>
+                    </Card.Header>
                     <Card.Body style={{textAlign:'left !important'}}>
 
                         <div style={{textAlign:'left !important'}} className='text-left'>
@@ -47,14 +68,12 @@ const Train = (props) => {
                     </Card.Body>
                 </Card>
             </Form>
-        )}
-        
-        <hr/>
+        )} 
 
-        {predictions.predicted&&<h1 className='text-center'>Billeder med nye søgeord:</h1>}
+        {(predictions.predicted.length>0)&&<h1 className='text-center'>Billeder med nye søgeord:</h1>}
         {predictions.predicted.map((p, key) => 
-            <Card className="m-1" style={{ width: '18rem' }} key={key}>
-                <Card.Img className="mt-2" src={p.url} alt={p.name}/>
+            <Card className="m-1 p-2" style={{ width: '18rem' }} key={key}>
+                <Card.Img src={p.urlLocal} alt={p.name} title={p.name}/>
                 <Card.Body>
                     <Card.Text>
                         {p.name} <br/>
@@ -62,12 +81,18 @@ const Train = (props) => {
                             <span key={i}>{s} </span>
                         )}
                     </Card.Text>
-                    {/* TODO: implement */}
+                    {/* TODO: implement if time
                     <Button type="submit" variant="primary">Rediger søgeord</Button>
+                    */}
                 </Card.Body>
             </Card>
         )}
        
+       {(predictions.existing.length>0)&&<h4>Følgende Billeder ligger allerede i billedarkivet og kan ikke uploades, ønsker du alligevel at uploade så omdøb filerne til nyt navn og upload igen:</h4>}
+        {predictions.existing.map((p, key) => 
+            <p key={key}>{p}</p>
+        )}
+
     </div> );
 }
  

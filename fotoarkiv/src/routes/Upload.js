@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
 import { savePhotos } from "../services/photoService";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const Upload = (props) => {
 
@@ -19,18 +20,23 @@ const Upload = (props) => {
         e.preventDefault();
         const formData = new FormData();
 
-        formData.append("Title", "Dette er en test");
-
-        Array.from(Photos.files).forEach(photo => {
-            formData.append('files', photo);
-        });
-
-        formData.append('photographerId', props.user.photographerId);
-        formData.append('photographer', props.user.name);
-
-        savePhotos(formData).then((res) => {
+        try {
+            formData.append("Title", "Dette er en test");
+            
+            Array.from(Photos.files).forEach(photo => {
+                formData.append('files', photo);
+            });
+            
+            formData.append('photographerId', props.user.photographerId);
+            formData.append('photographer', props.user.name);
+            
+            const res = await savePhotos(formData);
             navigate('/train', {state: {predictions: res.data}});
-        });
+            
+        } catch(ex) {
+            console.log(ex);
+            toast.error(ex.response.data);
+        }
     }
 
     return (

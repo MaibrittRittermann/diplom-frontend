@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Container, Card, Button } from 'react-bootstrap';
-import {getPhotoByLabel} from "../services/photoService";
+import {getPhotoByLabel, getPhoto} from "../services/photoService";
 import { useNavigate } from "react-router-dom";
 
 const Result = () => {
@@ -11,16 +11,24 @@ const Result = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const fetchData = async () => {
+            if (label) {
+    
+                let {data} = await getPhotoByLabel(label);
+    
+                await Promise.all(data.map( async (photo, i) => {
+    
+                    let p = await getPhoto(photo.name);
+                    let url = URL.createObjectURL(p.data);
+    
+                    data[i].urlLocal = url;
+                }));
+                
+                setPhotos(data); 
+            }
+        }
         fetchData();
     },[]);
-
-    const fetchData = async () => {
-        if (label)
-        await getPhotoByLabel(label)
-            .then((res) => { 
-                setPhotos(res.data); })
-            .catch((err)=>console.log(err));  // TODO: Log errors and make nice error message
-    }
 
     return ( 
     <Container className='mt-5'>
@@ -29,7 +37,7 @@ const Result = () => {
 
             { Photos.map((photo, key) => 
                 <Card className="m-1" style={{ width: '18rem' }} key={key}>
-                <Card.Img className="mt-2" src={photo.url} alt={label}/>
+                <Card.Img className="mt-2" src={photo.urlLocal} onLoad={() => URL.revokeObjectURL(photo.urlLocal)} alt={label}/>
                 <Card.Body>
                 <hr/>
                 <Card.Text>
