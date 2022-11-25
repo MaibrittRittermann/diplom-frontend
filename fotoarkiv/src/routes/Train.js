@@ -46,7 +46,7 @@ const Train = (props) => {
 
     return ( <div className="container" onSubmit={handleSubmit}>
 
-        {(predictions.unPredicted.length>0)&&<h1 className='text-center'>Billeder der mangler søgeord:</h1>}
+        {(predictions.unPredicted.length>0)&&<h1 className='text-center'>Fotos der mangler søgeord:</h1>}
         {predictions.unPredicted.map((p, key) => 
             <Form onSubmit={handleSubmit} key={key}>
                 <Card className="m-1 flex-row p-2">
@@ -70,7 +70,7 @@ const Train = (props) => {
             </Form>
         )} 
 
-        {(predictions.predicted.length>0)&&<h1 className='text-center'>Billeder med nye søgeord:</h1>}
+        {(predictions.predicted.length>0)&&<h1 className='text-center'>Fotos med nye søgeord:</h1>}
         {predictions.predicted.map((p, key) => 
             <Card className="m-1 p-2" style={{ width: '18rem' }} key={key}>
                 <Card.Img src={p.urlLocal} alt={p.name} title={p.name}/>
@@ -88,7 +88,7 @@ const Train = (props) => {
             </Card>
         )}
        
-       {(predictions.existing.length>0)&&<h4>Følgende Billeder ligger allerede i billedarkivet og kan ikke uploades, ønsker du alligevel at uploade så omdøb filerne til nyt navn og upload igen:</h4>}
+       {(predictions.existing.length>0)&&<h4>Følgende Fotos ligger allerede i arkivet og kan ikke uploades, ønsker du alligevel at uploade så omdøb filerne til nyt navn og upload igen:</h4>}
         {predictions.existing.map((p, key) => 
             <p key={key}>{p}</p>
         )}

@@ -32,7 +32,8 @@ const Result = () => {
 
     return ( 
     <Container className='mt-5'>
-        <h1>Fundne Fotos af {label}:</h1>
+        {(Photos.length>0)&&<h1>Fundne Fotos af {label}:</h1>}
+        {(Photos.length===0)&&<h1>Der findes ingen billeder om {label} i arkivet.</h1>}
         <div className="row justify-content-around">
 
             { Photos.map((photo, key) => 
@@ -47,7 +48,7 @@ const Result = () => {
                         <span className="small" key={i}>#{l} </span>      
                     )}
                 </Card.Text>
-                <Button variant="primary" onClick={() => {return navigate('/download', {state: {photo: photo}})}}>Hent foto</Button>
+                <Button variant="primary" name="download" onClick={() => {return navigate('/download', {state: {photo: photo}})}}>Hent foto</Button>
                 </Card.Body>
                 </Card>
             )}
