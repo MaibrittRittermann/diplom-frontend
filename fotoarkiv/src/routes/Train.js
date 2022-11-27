@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import { Form, Card, Button } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import { Form, CardGroup, Card, Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { trainModel } from '../services/photoService';
 import { getPhoto } from "../services/photoService";
@@ -9,6 +9,7 @@ const Train = (props) => {
 
     const location = useLocation();
     let predictions = location.state.predictions;
+    let [saveLabels, setSaveLabels] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +25,7 @@ const Train = (props) => {
             }));
         }
         fetchData();
-    },[]);
+    },[saveLabels]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -39,6 +40,12 @@ const Train = (props) => {
         formData.append('photographer', props.user.name);
 
         const trained = await trainModel(formData);
+
+        const nowLabeled = predictions.unPredicted.filter(x => x.name === e.target.photo.value);
+        predictions.predicted.push({...nowLabeled[0], predicts: labels });
+        predictions.unPredicted.splice(predictions.unPredicted.indexOf(nowLabeled[0]), 1);
+        setSaveLabels(saveLabels+1);
+
 
         if (trained.labeled === true)
             toast.message(`${e.target.photo.value} er gemt med søgeord ${labels}`);
@@ -71,9 +78,10 @@ const Train = (props) => {
         )} 
 
         {(predictions.predicted.length>0)&&<h1 className='text-center'>Fotos med nye søgeord:</h1>}
+        <div className="row justify-content-around mb-5">
         {predictions.predicted.map((p, key) => 
-            <Card className="m-1 p-2" style={{ width: '18rem' }} key={key}>
-                <Card.Img src={p.urlLocal} alt={p.name} title={p.name}/>
+            <Card className="m-1" style={{ width: '18rem' }} key={key}>
+                <Card.Img className="mt-2" src={p.urlLocal} alt={p.name} title={p.name}/>
                 <Card.Body>
                     <Card.Text>
                         {p.name} <br/>
@@ -87,7 +95,7 @@ const Train = (props) => {
                 </Card.Body>
             </Card>
         )}
-       
+       </div>
        {(predictions.existing.length>0)&&<h4>Følgende Fotos ligger allerede i arkivet og kan ikke uploades, ønsker du alligevel at uploade så omdøb filerne til nyt navn og upload igen:</h4>}
         {predictions.existing.map((p, key) => 
             <p key={key}>{p}</p>

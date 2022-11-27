@@ -38,7 +38,7 @@ const Result = () => {
 
             { Photos.map((photo, key) => 
                 <Card className="m-1" style={{ width: '18rem' }} key={key}>
-                <Card.Img className="mt-2" src={photo.urlLocal} onLoad={() => URL.revokeObjectURL(photo.urlLocal)} alt={label}/>
+                <Card.Img className="mt-2" src={photo.urlLocal} onLoad={() => URL.revokeObjectURL(photo.urlLocal)} title={photo.name} alt={label}/>
                 <Card.Body>
                 <hr/>
                 <Card.Text>
@@ -48,7 +48,7 @@ const Result = () => {
                         <span className="small" key={i}>#{l} </span>      
                     )}
                 </Card.Text>
-                <Button variant="primary" name="download" onClick={() => {return navigate('/download', {state: {photo: photo}})}}>Hent foto</Button>
+                <Button variant="primary" name="download" id={photo.name} onClick={() => {return navigate('/download', {state: {photo: photo}})}}>Hent foto</Button>
                 </Card.Body>
                 </Card>
             )}

@@ -59,8 +59,9 @@ const Download = (props) => {
                     <Card.Img className="mt-2" src={Data.photoURL} alt={photo.name} onLoad={() => URL.revokeObjectURL(photo.urlLocal)}  title={photo.title}/>
                     <Card.Body>
                         <Card.Text>
-                            <Form.Label>Hvilket medie skal billedet vises på: </Form.Label>
-                            
+                            <h6>{photo.name} af {photo.photographer}</h6>
+                            <p>Taget den {new Date(photo.date).toLocaleDateString('da-DK')}</p>
+                            <Form.Label>Hvilket medie skal billedet vises på: </Form.Label>                            
                             <Form.Select name="media" onChange={handleChange}>
                                 <option value={'Avis'}>Avis</option>
                                 <option value={'Ugeavis'}>Ugeavis</option>
