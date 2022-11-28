@@ -60,7 +60,8 @@ const User = () => {
 
     return ( 
         <div  className="mt-5">
-            <h1 className='text-center'>Opret bruger</h1>
+            {User._id && <h1 className='text-center'>Rediger bruger</h1>}
+            {!User._id && <h1 className='text-center'>Opret bruger</h1>}
             <div className='d-flex justify-content-center align-items-center'>
                 <Form className="rounded p-4" onSubmit={handleSubmit}>
                     <Form.Group className='mb-3' controlId='formBasicName'>
