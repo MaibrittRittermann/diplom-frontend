@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Form, CardGroup, Card, Button } from 'react-bootstrap';
+import { Form, Card, Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { trainModel } from '../services/photoService';
 import { getPhoto } from "../services/photoService";

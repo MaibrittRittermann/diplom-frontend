@@ -2,6 +2,7 @@ import {getUsers} from '../services/userService';
 import React, { useState, useEffect } from 'react';
 import { Container, Button, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {Link} from 'react-router-dom';
 
 const Users = () => {
@@ -16,7 +17,7 @@ const Users = () => {
     const fetchData = async () => {
         await getUsers()
             .then((res) => { setUsers(res.data); })
-            .catch((err)=>console.log(err));  // TODO: Log errors and make nice error message
+            .catch((err)=>toast.err(`Der opstod en fejl: ${err}`)); 
     }
         
     const handleCreate = () => {

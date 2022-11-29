@@ -30,7 +30,7 @@ const User = () => {
                 const eUser = { _id: res.data._id, name: res.data.name, email: res.data.email, isAdmin: res.data.isAdmin};
                 setUser({...eUser});
             })
-            .catch(err => { console.log(err)}); // TODO: Log errors and make nice error message
+            .catch(err => { toast.err(`Der opstod en fejl: ${err}`)}); 
     }
 
     const handleChange = e => {

@@ -1,4 +1,4 @@
-// Writes a file to src/config.js exporting the environment variables
+// Writes a file to src/config.js exporting the environment variables - used for test purposes
 const environment = require('../environment');
 const fs = require('fs');
 const path = require('path');
