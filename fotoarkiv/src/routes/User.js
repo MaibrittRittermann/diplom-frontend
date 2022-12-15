@@ -27,7 +27,13 @@ const User = () => {
     async function editUser() {
         if(User._id) getUser(User._id)
             .then(res => {
-                const eUser = { _id: res.data._id, name: res.data.name, email: res.data.email, isAdmin: res.data.isAdmin};
+                const eUser = { 
+                    _id: res.data._id, 
+                    name: res.data.name, 
+                    email: res.data.email, 
+                    isAdmin: res.data.isAdmin, 
+                    photographerId: res.data.photographerId, 
+                };
                 setUser({...eUser});
             })
             .catch(err => { toast.err(`Der opstod en fejl: ${err}`)}); 
